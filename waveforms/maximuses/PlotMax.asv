@@ -1,0 +1,3 @@
+input = fopen('D:/waveforms/maximuses/output.txt','r');
+formatSpec = '%f %f \n';
+waveform = fscanf(input, formatSpec, [2 Inf]);
