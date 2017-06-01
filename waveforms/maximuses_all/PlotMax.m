@@ -5,7 +5,7 @@ data = [];
 for folder = 1:length(listing)
     file = fullfile('D:/waveforms/maximuses_all/', listing{folder});  
     input = fopen(file,'r');
-    formatSpec = '%f %f %f\n';
+    formatSpec = '%f %f %f\n';f
     data = [data fscanf(input, formatSpec,[3 Inf])];
     fclose(input);
 end;
@@ -25,8 +25,7 @@ ft = 'linearinterp';
 
 % Plot fit with data.
 figure( 'Name', 'untitled fit 1' );
-h = plot( fitresult, [xData, yData], zData );
-legend( h, 'untitled fit 1', 'z_o vs. x_o, y_o', 'Location', 'NorthEast' );
+h = plot( fitresult );
 % Label axes
 xlabel x_o
 ylabel y_o

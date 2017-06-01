@@ -128,7 +128,7 @@ namespace SurfaceMap
 
         public void doWork()
         {
-            PixelMap pixelMap = new PixelMap(dataSource.getNumberOfPoints(), dataSource.getNumberOfPoints(), 30, 100);
+            PixelMap pixelMap = new PixelMap(dataSource.getNumberOfPoints(), dataSource.getNumberOfPoints(), 10, 100);
             pixelMap.setDt(dataSource.getStep());
             pixelMap.setXOrigin(dataSource.getXOrigin());
             pixelMap.getD1();
@@ -149,10 +149,11 @@ namespace SurfaceMap
             Model.Series.Add(heatMapSeries1);
             Model.InvalidatePlot(true);
 
-            last = DateTime.Now;
+            DateTime last = DateTime.Now;
             DateTime current;
             while (!isStoped)
             {
+                DateTime current1 = DateTime.Now;
                 if (false)
                 {
                     current = DateTime.Now;
@@ -164,6 +165,14 @@ namespace SurfaceMap
                 }
 
                 heatMapSeries1.Data = surfaceCalculation.getOutput();
+
+                if (false)
+                {
+                    int last1 = 100 + (DateTime.Now.Millisecond - current1.Millisecond);
+                    StreamWriter file2 = new StreamWriter(@"D:\waveforms\maximuses_all\output_iter_15_old.txt", true);
+                    file2.WriteLine("15" + " " + last1.ToString().Replace(',', '.'));
+                    file2.Close();
+                }
 
                 Model.InvalidatePlot(true);
             }

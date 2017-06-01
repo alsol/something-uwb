@@ -14,7 +14,9 @@ namespace SurfaceMap.SurfaceUtils.DataSources
 
         private String folder = "D:\\waveforms\\20_01_17\\additional_steel";
 
-        private String firstCallPostfix = "_16-01-2017-18-32-45";
+        private String firstCallPostfix = "_20-01-2017-12-20-01";
+
+        private String secondCallPostfix = "_20-01-2017-12-23-05";
 
         private String[] avaliablePrefixes;
 
@@ -84,11 +86,13 @@ namespace SurfaceMap.SurfaceUtils.DataSources
             switch (type)
             {
                 case 1:
-                    double[] array = parseFile("channel_1", avaliablePrefixes[currentIndex]);
+                    //double[] array = parseFile("channel_1", avaliablePrefixes[currentIndex]);
+                    double[] array = parseFile("channel_1", secondCallPostfix);
                     output = array;
                     break;
                 case 2:
-                    double[] tmp = parseFile("channel_2", avaliablePrefixes[currentIndex]);
+                    //double[] tmp = parseFile("channel_2", avaliablePrefixes[currentIndex]);
+                    double[] tmp = parseFile("channel_2", secondCallPostfix);
                     output = tmp;
                     break;
                 default:

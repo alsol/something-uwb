@@ -66,12 +66,12 @@ namespace SurfaceMap.SurfaceMath
                     double ifSignalFirst = ifSignal.Current;
                     double isSignalFirst = isSignal.Current;
 
-                    while (ifSignal.MoveNext() && isSignal.MoveNext() && (pointCount++ < 30))
+                    while (ifSignal.MoveNext() && isSignal.MoveNext() && (pointCount++ < 10))
                     {
                         sum += ifSignal.Current * isSignal.Current;
                     }
                     Double value = sum / pointCount;
-                    Double threshold = 0.00001;
+                    Double threshold = Threshold(i, j);
                     //Double threshold = 0;
                     if (value > threshold)
                     {
@@ -80,7 +80,7 @@ namespace SurfaceMap.SurfaceMath
                     output[i, j] = value > threshold ? value : 0;
                 });
             });
-            if (true)
+            if (false)
             {
                 Thread.Sleep(2);
                 String currentTime = DateTime.Now.Millisecond.ToString().Replace(" ", "-").Replace(".", "-").Replace(":", "-");
@@ -94,6 +94,7 @@ namespace SurfaceMap.SurfaceMath
             }
             if (false)
             {
+                Thread.Sleep(10);
                 String maxKey = null;
                 double max = 0;
                 foreach (String str in parallelMap.Keys)
@@ -108,11 +109,21 @@ namespace SurfaceMap.SurfaceMath
                 Debug.Print(maxKey + " " + max.ToString());
                 if (max != 0)
                 {
-                    StreamWriter file2 = new StreamWriter(@"D:\waveforms\maximuses\output.txt", true);
+                    StreamWriter file2 = new StreamWriter(@"D:\waveforms\maximuses_all\output.txt", true);
                     file2.WriteLine(maxKey + " " + max.ToString().Replace(',', '.'));
                     file2.Close();
                 }
             }
         }
+
+        private double Threshold(int i, int j)
+        {
+            double a = 0.000623;
+            double b = -1.239e-06;
+            double c = -4.863e-06;
+            
+            return a + b * i + c * j;
+        }
+    
     }
 }
